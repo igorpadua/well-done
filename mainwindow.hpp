@@ -24,6 +24,7 @@ private slots:
     void lineSearchTextChanged(const QString &arg1);
     void actionFazerTriggered();
     void actionFazendoTriggered();
+    void actionFeitoTriggered();
 
 private:
     Ui::MainWindow *ui;

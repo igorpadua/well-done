@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->lineSearch, &QLineEdit::textChanged, this, &MainWindow::lineSearchTextChanged);
     connect(ui->action_FAZER, &QAction::triggered, this, &MainWindow::actionFazerTriggered);
     connect(ui->actionFazendo, &QAction::triggered, this, &MainWindow::actionFazendoTriggered);
+    connect(ui->actionFeito, &QAction::triggered, this, &MainWindow::actionFeitoTriggered);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -122,4 +123,9 @@ void MainWindow::actionFazerTriggered()
 void MainWindow::actionFazendoTriggered()
 {
     filterTable("Fazendo", 4);
+}
+
+void MainWindow::actionFeitoTriggered()
+{
+    filterTable("Feito", 4);
 }
