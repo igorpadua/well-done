@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QMainWindow>
-
 #include "newtask.hpp"
 
 QT_BEGIN_NAMESPACE
@@ -21,5 +20,5 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QList<NewTask> tasks;
+    void addTableItem(NewTask *newTask);
 };

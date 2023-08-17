@@ -2,6 +2,8 @@
 
 #include <QDialog>
 #include <QDate>
+#include <QAbstractButton>
+#include <QMessageBox>
 
 namespace Ui {
 class NewTask;
@@ -25,6 +27,9 @@ public:
     void setEndDate(const QDate &newEndDate);
     QString status() const;
     void setStatus(const QString &newStatus);
+
+private slots:
+    void buttonBoxClicked(QAbstractButton *button);
 
 private:
     Ui::NewTask *ui;
