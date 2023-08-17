@@ -1,14 +1,22 @@
 #include "newtask.hpp"
 #include "ui_newtask.h"
 
-NewTask::NewTask(QWidget *parent) :
+NewTask::NewTask(QWidget *parent, const QString &name, const QString &description, const QDate &startDate, const QDate &endDate, const QString &status) :
     QDialog(parent),
     ui(new Ui::NewTask)
+  , m_name(name)
+  , m_description(description)
+  , m_startDate(startDate)
+  , m_endDate(endDate)
+  , m_status(status)
 {
     ui->setupUi(this);
 
-    ui->dateEditStartDate->setDate(QDate::currentDate());
-    ui->dateEditEndDate->setDate(QDate::currentDate());
+    ui->lineEditName->setText(m_name);
+    ui->textEditDescription->setText(m_description);
+    ui->dateEditStartDate->setDate(m_startDate);
+    ui->dateEditEndDate->setDate(m_endDate);
+    ui->comboBox->setCurrentText(m_status);
 
     connect(ui->buttonBox, &QDialogButtonBox::clicked, this, &NewTask::buttonBoxClicked);
 }

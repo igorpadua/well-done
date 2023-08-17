@@ -14,7 +14,7 @@ class NewTask : public QDialog
     Q_OBJECT
 
 public:
-    explicit NewTask(QWidget *parent = nullptr);
+    explicit NewTask(QWidget *parent = nullptr, const QString &name = "", const QString &description = "", const QDate &startDate = QDate::currentDate(), const QDate &endDate = QDate::currentDate(), const QString &status = "");
     ~NewTask();
 
     QString name() const;
