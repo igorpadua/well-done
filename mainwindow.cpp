@@ -27,6 +27,7 @@ void MainWindow::newTaskTrigged()
     newTask->exec();
 
     if (newTask->result() == QDialog::Rejected) {
+        ui->statusbar->showMessage("Tarefa não adicionada!", 1500);
         return;
     }
 
@@ -70,6 +71,7 @@ void MainWindow::tableWidgetDoubleClicked(const QModelIndex &index)
    newTask->exec();
 
    if (newTask->result() == QDialog::Rejected) {
+       ui->statusbar->showMessage("Atualização cancelada!", 1500);
        return;
    }
 
