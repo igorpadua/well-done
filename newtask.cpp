@@ -1,64 +1,64 @@
 #include "newtask.hpp"
 #include "ui_newtask.h"
 
-newTask::newTask(QWidget *parent) :
+NewTask::NewTask(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::newTask)
+    ui(new Ui::NewTask)
 {
     ui->setupUi(this);
 }
 
-newTask::~newTask()
+NewTask::~NewTask()
 {
     delete ui;
 }
 
-QString newTask::name() const
+QString NewTask::name() const
 {
     return m_name;
 }
 
-void newTask::setName(const QString &newName)
+void NewTask::setName(const QString &newName)
 {
     m_name = newName;
 }
 
-QString newTask::description() const
+QString NewTask::description() const
 {
     return m_description;
 }
 
-void newTask::setDescription(const QString &newDescription)
+void NewTask::setDescription(const QString &newDescription)
 {
     m_description = newDescription;
 }
 
-QDate newTask::startDate() const
+QDate NewTask::startDate() const
 {
     return m_startDate;
 }
 
-void newTask::setStartDate(const QDate &newStartDate)
+void NewTask::setStartDate(const QDate &newStartDate)
 {
     m_startDate = newStartDate;
 }
 
-QDate newTask::finishDate() const
+QDate NewTask::endDate() const
 {
-    return m_finishDate;
+    return m_endDate;
 }
 
-void newTask::setFinishDate(const QDate &newFinishDate)
+void NewTask::setEndDate(const QDate &newEndDate)
 {
-    m_finishDate = newFinishDate;
+    m_endDate = newEndDate;
 }
 
-QString newTask::getStatus() const
+QString NewTask::status() const
 {
-    return status;
+    return m_status;
 }
 
-void newTask::setStatus(const QString &newStatus)
+void NewTask::setStatus(const QString &newStatus)
 {
-    status = newStatus;
+    m_status = newStatus;
 }

@@ -4,16 +4,16 @@
 #include <QDate>
 
 namespace Ui {
-class newTask;
+class NewTask;
 }
 
-class newTask : public QWidget
+class NewTask : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit newTask(QWidget *parent = nullptr);
-    ~newTask();
+    explicit NewTask(QWidget *parent = nullptr);
+    ~NewTask();
 
     QString name() const;
     void setName(const QString &newName);
@@ -21,17 +21,17 @@ public:
     void setDescription(const QString &newDescription);
     QDate startDate() const;
     void setStartDate(const QDate &newStartDate);
-    QDate finishDate() const;
-    void setFinishDate(const QDate &newFinishDate);
-    QString getStatus() const;
+    QDate endDate() const;
+    void setEndDate(const QDate &newEndDate);
+    QString status() const;
     void setStatus(const QString &newStatus);
 
 private:
-    Ui::newTask *ui;
+    Ui::NewTask *ui;
     QString m_name;
     QString m_description;
     QDate m_startDate;
-    QDate m_finishDate;
-    QString status;
+    QDate m_endDate;
+    QString m_status;
 };
 
