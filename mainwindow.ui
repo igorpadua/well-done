@@ -13,9 +13,133 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineSearch">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Pesquisar</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="tableWidget">
+      <column>
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Descrição</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Data de Início</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Data de Termino</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuTarefa">
+    <property name="title">
+     <string>Tarefa</string>
+    </property>
+    <addaction name="actionNova_Tarefa"/>
+    <addaction name="actionPesquisar"/>
+   </widget>
+   <widget class="QMenu" name="menuFiltrar">
+    <property name="title">
+     <string>Filtrar</string>
+    </property>
+    <addaction name="action_FAZER"/>
+    <addaction name="actionFazendo"/>
+    <addaction name="actionFeito"/>
+   </widget>
+   <widget class="QMenu" name="menuSobre">
+    <property name="title">
+     <string>Sobre</string>
+    </property>
+    <addaction name="actionWell_Done"/>
+    <addaction name="actionQt"/>
+   </widget>
+   <addaction name="menuTarefa"/>
+   <addaction name="menuFiltrar"/>
+   <addaction name="menuSobre"/>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNova_Tarefa"/>
+   <addaction name="actionPesquisar"/>
+  </widget>
+  <action name="actionNova_Tarefa">
+   <property name="text">
+    <string>Nova Tarefa</string>
+   </property>
+  </action>
+  <action name="action_FAZER">
+   <property name="text">
+    <string>À Fazer</string>
+   </property>
+  </action>
+  <action name="actionFazendo">
+   <property name="text">
+    <string>Fazendo</string>
+   </property>
+  </action>
+  <action name="actionFeito">
+   <property name="text">
+    <string>Feito</string>
+   </property>
+  </action>
+  <action name="actionWell_Done">
+   <property name="text">
+    <string>Well Done</string>
+   </property>
+  </action>
+  <action name="actionQt">
+   <property name="text">
+    <string>Qt</string>
+   </property>
+  </action>
+  <action name="actionPesquisar">
+   <property name="text">
+    <string>Pesquisar</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
