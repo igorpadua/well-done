@@ -23,6 +23,7 @@ private slots:
     void actionPesquisarTriggered();
     void lineSearchTextChanged(const QString &arg1);
     void actionFazerTriggered();
+    void actionFazendoTriggered();
 
 private:
     Ui::MainWindow *ui;
