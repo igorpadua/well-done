@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_FAZER, &QAction::triggered, this, &MainWindow::actionFazerTriggered);
     connect(ui->actionFazendo, &QAction::triggered, this, &MainWindow::actionFazendoTriggered);
     connect(ui->actionFeito, &QAction::triggered, this, &MainWindow::actionFeitoTriggered);
+    connect(ui->actionTodos, &QAction::triggered, this, &MainWindow::actionTodosTriggered);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -129,3 +130,11 @@ void MainWindow::actionFeitoTriggered()
 {
     filterTable("Feito", 4);
 }
+
+void MainWindow::actionTodosTriggered()
+{
+    for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
+        ui->tableWidget->showRow(i);
+    }
+}
+

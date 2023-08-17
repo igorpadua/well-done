@@ -25,6 +25,7 @@ private slots:
     void actionFazerTriggered();
     void actionFazendoTriggered();
     void actionFeitoTriggered();
+    void actionTodosTriggered();
 
 private:
     Ui::MainWindow *ui;
