@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QDebug>
 
 #include "newtask.hpp"
 
@@ -19,6 +20,8 @@ public:
 private slots:
     void newTaskTrigged();
     void tableWidgetDoubleClicked(const QModelIndex &index);
+    void actionPesquisarTriggered();
+    void lineSearchTextChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

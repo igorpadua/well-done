@@ -9,10 +9,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->actionNova_Tarefa, &QAction::triggered, this, &MainWindow::newTaskTrigged);
     connect(ui->tableWidget, &QTableWidget::doubleClicked, this, &MainWindow::tableWidgetDoubleClicked);
+    connect(ui->actionPesquisar, &QAction::triggered, this, &MainWindow::actionPesquisarTriggered);
+    connect(ui->lineSearch, &QLineEdit::textChanged, this, &MainWindow::lineSearchTextChanged);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWidget->resizeRowsToContents();
+
+    ui->lineSearch->hide();
 }
 
 MainWindow::~MainWindow()
@@ -76,5 +80,30 @@ void MainWindow::tableWidgetDoubleClicked(const QModelIndex &index)
    }
 
    updateTableItem(newTask);
+}
+
+
+void MainWindow::actionPesquisarTriggered()
+{
+    if (ui->lineSearch->isHidden()) {
+        ui->lineSearch->show();
+        ui->lineSearch->setFocus();
+    } else {
+        ui->lineSearch->hide();
+        ui->lineSearch->clear();
+    }
+}
+
+
+void MainWindow::lineSearchTextChanged(const QString &arg1)
+{
+    for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
+        if (ui->tableWidget->item(i, 0)->text().contains(arg1, Qt::CaseInsensitive)) {
+            ui->tableWidget->showRow(i);
+        } else {
+            ui->tableWidget->hideRow(i);
+        }
+    }
+
 }
 

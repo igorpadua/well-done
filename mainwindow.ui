@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="placeholderText">
-       <string>Pesquisar</string>
+       <string>Pesquisar nome</string>
       </property>
      </widget>
     </item>
