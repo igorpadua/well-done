@@ -38,6 +38,7 @@ else()
     else()
         add_executable(well-done
             ${PROJECT_SOURCES}
+            newtask.hpp newtask.cpp newtask.ui
         )
     endif()
 endif()
