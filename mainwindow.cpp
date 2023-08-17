@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tableWidget, &QTableWidget::doubleClicked, this, &MainWindow::tableWidgetDoubleClicked);
     connect(ui->actionPesquisar, &QAction::triggered, this, &MainWindow::actionPesquisarTriggered);
     connect(ui->lineSearch, &QLineEdit::textChanged, this, &MainWindow::lineSearchTextChanged);
+    connect(ui->action_FAZER, &QAction::triggered, this, &MainWindow::actionFazerTriggered);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -65,6 +66,17 @@ void MainWindow::updateTableItem(const NewTask *newTask)
     ui->statusbar->showMessage("Tarefa atualizada com sucesso!", 1500);
 }
 
+void MainWindow::filterTable(const QString &text, const int &column)
+{
+    for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
+        if (ui->tableWidget->item(i, column)->text().contains(text, Qt::CaseInsensitive)) {
+            ui->tableWidget->showRow(i);
+        } else {
+            ui->tableWidget->hideRow(i);
+        }
+    }
+}
+
 
 void MainWindow::tableWidgetDoubleClicked(const QModelIndex &index)
 {
@@ -97,13 +109,11 @@ void MainWindow::actionPesquisarTriggered()
 
 void MainWindow::lineSearchTextChanged(const QString &arg1)
 {
-    for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
-        if (ui->tableWidget->item(i, 0)->text().contains(arg1, Qt::CaseInsensitive)) {
-            ui->tableWidget->showRow(i);
-        } else {
-            ui->tableWidget->hideRow(i);
-        }
-    }
-
+    filterTable(arg1, 0);
 }
 
+
+void MainWindow::actionFazerTriggered()
+{
+    filterTable("À Fazer", 4);
+}

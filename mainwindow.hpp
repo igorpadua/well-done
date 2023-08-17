@@ -22,9 +22,11 @@ private slots:
     void tableWidgetDoubleClicked(const QModelIndex &index);
     void actionPesquisarTriggered();
     void lineSearchTextChanged(const QString &arg1);
+    void actionFazerTriggered();
 
 private:
     Ui::MainWindow *ui;
     void addTableItem(const NewTask *newTask);
     void updateTableItem(const NewTask *newTask);
+    void filterTable(const QString &text, const int &column);
 };

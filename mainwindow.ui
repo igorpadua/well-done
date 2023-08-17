@@ -97,6 +97,7 @@
     <addaction name="action_FAZER"/>
     <addaction name="actionFazendo"/>
     <addaction name="actionFeito"/>
+    <addaction name="actionTodos"/>
    </widget>
    <widget class="QMenu" name="menuSobre">
     <property name="title">
@@ -171,6 +172,11 @@
    </property>
    <property name="text">
     <string>Pesquisar</string>
+   </property>
+  </action>
+  <action name="actionTodos">
+   <property name="text">
+    <string>Todos</string>
    </property>
   </action>
  </widget>
