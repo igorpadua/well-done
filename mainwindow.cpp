@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->setSortingEnabled(true);
 
     ui->lineSearch->hide();
 }
