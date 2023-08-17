@@ -2,7 +2,7 @@
 #include "ui_newtask.h"
 
 NewTask::NewTask(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::NewTask)
 {
     ui->setupUi(this);

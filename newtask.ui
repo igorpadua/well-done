@@ -10,6 +10,9 @@
     <height>374</height>
    </rect>
   </property>
+  <property name="windowTitle">
+   <string comment="NewTask" extracomment="NewTask"/>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">

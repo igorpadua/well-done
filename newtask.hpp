@@ -1,13 +1,13 @@
 #pragma once
 
-#include <QWidget>
+#include <QDialog>
 #include <QDate>
 
 namespace Ui {
 class NewTask;
 }
 
-class NewTask : public QWidget
+class NewTask : public QDialog
 {
     Q_OBJECT
 
