@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->actionNova_Tarefa, &QAction::triggered, this, &MainWindow::newTaskTrigged);
+
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget->resizeRowsToContents();
 }
 
 MainWindow::~MainWindow()
@@ -28,7 +32,7 @@ void MainWindow::newTaskTrigged()
     addTableItem(newTask);
 }
 
-void MainWindow::addTableItem(NewTask *newTask)
+void MainWindow::addTableItem(const NewTask *newTask)
 {
     ui->tableWidget->insertRow(ui->tableWidget->rowCount());
     ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 0, new QTableWidgetItem(newTask->name()));

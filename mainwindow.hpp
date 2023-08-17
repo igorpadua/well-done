@@ -20,5 +20,5 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    void addTableItem(NewTask *newTask);
+    void addTableItem(const NewTask *newTask);
 };
