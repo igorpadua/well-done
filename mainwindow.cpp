@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionFazendo, &QAction::triggered, this, &MainWindow::actionFazendoTriggered);
     connect(ui->actionFeito, &QAction::triggered, this, &MainWindow::actionFeitoTriggered);
     connect(ui->actionTodos, &QAction::triggered, this, &MainWindow::actionTodosTriggered);
+    connect(ui->actionQt, &QAction::triggered, this, &MainWindow::actionQtTriggered);
+    connect(ui->actionWell_Done, &QAction::triggered, this, &MainWindow::actionWellDoneTriggered);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -137,5 +139,21 @@ void MainWindow::actionTodosTriggered()
     for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
         ui->tableWidget->showRow(i);
     }
+}
+
+
+void MainWindow::actionQtTriggered()
+{
+    QMessageBox::aboutQt(this, "Sobre Qt");
+}
+
+
+void MainWindow::actionWellDoneTriggered()
+{
+    QMessageBox::about(this, "Sobre", "Desenvolvido por: <b>Igor Moreira Pádua</b><br>"
+                                       "Email: <b>igormoreira@protonmail.com</b><br>"
+                                       "GitHub: <b>github.com/igorpadua</b><br>"
+                                       "Versão: <b>1.0</b><br>");
+
 }
 

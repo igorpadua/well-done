@@ -26,6 +26,8 @@ private slots:
     void actionFazendoTriggered();
     void actionFeitoTriggered();
     void actionTodosTriggered();
+    void actionQtTriggered();
+    void actionWellDoneTriggered();
 
 private:
     Ui::MainWindow *ui;
