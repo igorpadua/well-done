@@ -15,6 +15,18 @@ MainWindow::MainWindow(QWidget *parent)
         return;
     }
 
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM TASK");
+
+    while (query.next()) {
+        ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 0, new QTableWidgetItem(query.value(1).toString()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 1, new QTableWidgetItem(query.value(2).toString()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 2, new QTableWidgetItem(query.value(3).toString()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 3, new QTableWidgetItem(query.value(4).toString()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 4, new QTableWidgetItem(query.value(5).toString()));
+    }
+
     connectActions();
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
