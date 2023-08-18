@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (!db.open()) {
         qDebug() << db.lastError().text();
+        ui->statusbar->showMessage("Banco de dados não encontrado!", 1500);
         return;
     }
 
@@ -81,12 +82,20 @@ void MainWindow::addTableItem(const NewTask *newTask)
         }
 
         db.close();
+
     }
 
 }
 
 void MainWindow::updateTableItem(const NewTask *newTask)
 {
+
+    if (!db.open()) {
+        qDebug() << db.lastError().text();
+        ui->statusbar->showMessage("Tarefa não atualizada!", 1500);
+        return;
+    }
+
     ui->tableWidget->setItem(ui->tableWidget->currentRow(), 0, new QTableWidgetItem(newTask->name()));
     ui->tableWidget->setItem(ui->tableWidget->currentRow(), 1, new QTableWidgetItem(newTask->description()));
     ui->tableWidget->setItem(ui->tableWidget->currentRow(), 2, new QTableWidgetItem(newTask->startDate().toString("dd/MM/yyyy")));
@@ -95,8 +104,27 @@ void MainWindow::updateTableItem(const NewTask *newTask)
 
     ui->tableWidget->resizeRowsToContents();
 
-
     ui->statusbar->showMessage("Tarefa atualizada com sucesso!", 1500);
+
+    QSqlQuery query(db);
+
+    // causa crash na aplicação
+//    qDebug() << ui->tableWidget->item(ui->tableWidget->currentRow(), 5)->text();
+    auto id = ui->tableWidget->currentRow() + 1;
+
+    query.exec("UPDATE TASK SET name = '" + newTask->name() + "', description = '" + newTask->description() + "', startDate = '" + newTask->startDate().toString("dd/MM/yyyy") + "', finishDate = '" + newTask->endDate().toString("dd/MM/yyyy") + "', status = '" + newTask->status() + "' WHERE id = " + QString::number(id));
+
+
+    if (query.lastError().isValid()) {
+        qDebug() << query.lastError();
+    }
+
+    db.close();
+
+
+    if (query.lastError().isValid()) {
+        qDebug() << query.lastError();
+    }
 }
 
 void MainWindow::filterTable(const QString &text, const int &column)
