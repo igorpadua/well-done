@@ -108,8 +108,6 @@ void MainWindow::updateTableItem(const NewTask *newTask)
 
     QSqlQuery query(db);
 
-    // causa crash na aplicação
-//    qDebug() << ui->tableWidget->item(ui->tableWidget->currentRow(), 5)->text();
     auto id = ui->tableWidget->currentRow() + 1;
 
     query.exec("UPDATE TASK SET name = '" + newTask->name() + "', description = '" + newTask->description() + "', startDate = '" + newTask->startDate().toString("dd/MM/yyyy") + "', finishDate = '" + newTask->endDate().toString("dd/MM/yyyy") + "', status = '" + newTask->status() + "' WHERE id = " + QString::number(id));
