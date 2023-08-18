@@ -2,6 +2,9 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 
 #include "newtask.hpp"
 
@@ -31,7 +34,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QSqlDatabase db;
     void addTableItem(const NewTask *newTask);
     void updateTableItem(const NewTask *newTask);
     void filterTable(const QString &text, const int &column);
+    void connectActions() const;
 };

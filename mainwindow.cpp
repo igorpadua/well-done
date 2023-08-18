@@ -4,19 +4,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     ui->setupUi(this);
 
-    connect(ui->actionNova_Tarefa, &QAction::triggered, this, &MainWindow::newTaskTrigged);
-    connect(ui->tableWidget, &QTableWidget::doubleClicked, this, &MainWindow::tableWidgetDoubleClicked);
-    connect(ui->actionPesquisar, &QAction::triggered, this, &MainWindow::actionPesquisarTriggered);
-    connect(ui->lineSearch, &QLineEdit::textChanged, this, &MainWindow::lineSearchTextChanged);
-    connect(ui->action_FAZER, &QAction::triggered, this, &MainWindow::actionFazerTriggered);
-    connect(ui->actionFazendo, &QAction::triggered, this, &MainWindow::actionFazendoTriggered);
-    connect(ui->actionFeito, &QAction::triggered, this, &MainWindow::actionFeitoTriggered);
-    connect(ui->actionTodos, &QAction::triggered, this, &MainWindow::actionTodosTriggered);
-    connect(ui->actionQt, &QAction::triggered, this, &MainWindow::actionQtTriggered);
-    connect(ui->actionWell_Done, &QAction::triggered, this, &MainWindow::actionWellDoneTriggered);
+    db.setDatabaseName("/home/igor/Documentos/Programas/well-done/well-done.db");
+
+    if (!db.open()) {
+        qDebug() << db.lastError().text();
+        return;
+    }
+
+    connectActions();
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -47,16 +46,31 @@ void MainWindow::newTaskTrigged()
 
 void MainWindow::addTableItem(const NewTask *newTask)
 {
-    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-    ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 0, new QTableWidgetItem(newTask->name()));
-    ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 1, new QTableWidgetItem(newTask->description()));
-    ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 2, new QTableWidgetItem(newTask->startDate().toString("dd/MM/yyyy")));
-    ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 3, new QTableWidgetItem(newTask->endDate().toString("dd/MM/yyyy")));
-    ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 4, new QTableWidgetItem(newTask->status()));
 
-    ui->tableWidget->resizeRowsToContents();
+    if (db.open()) {
+        ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 0, new QTableWidgetItem(newTask->name()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 1, new QTableWidgetItem(newTask->description()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 2, new QTableWidgetItem(newTask->startDate().toString("dd/MM/yyyy")));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 3, new QTableWidgetItem(newTask->endDate().toString("dd/MM/yyyy")));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 4, new QTableWidgetItem(newTask->status()));
 
-    ui->statusbar->showMessage("Tarefa adicionada com sucesso!", 1500);
+        ui->tableWidget->resizeRowsToContents();
+
+
+        ui->statusbar->showMessage("Tarefa adicionada com sucesso!", 1500);
+
+        QSqlQuery query(db);
+
+        query.exec("INSERT INTO TASK (name, description, startDate, finishDate, status) VALUES ('" + newTask->name() + "', '" + newTask->description() + "', '" + newTask->startDate().toString("dd/MM/yyyy") + "', '" + newTask->endDate().toString("dd/MM/yyyy") + "', '" + newTask->status() + "')");
+
+        if (query.lastError().isValid()) {
+            qDebug() << query.lastError();
+        }
+
+        db.close();
+    }
+
 }
 
 void MainWindow::updateTableItem(const NewTask *newTask)
@@ -68,6 +82,7 @@ void MainWindow::updateTableItem(const NewTask *newTask)
     ui->tableWidget->setItem(ui->tableWidget->currentRow(), 4, new QTableWidgetItem(newTask->status()));
 
     ui->tableWidget->resizeRowsToContents();
+
 
     ui->statusbar->showMessage("Tarefa atualizada com sucesso!", 1500);
 }
@@ -83,6 +98,19 @@ void MainWindow::filterTable(const QString &text, const int &column)
     }
 }
 
+void MainWindow::connectActions() const
+{
+    connect(ui->actionNova_Tarefa, &QAction::triggered, this, &MainWindow::newTaskTrigged);
+    connect(ui->tableWidget, &QTableWidget::doubleClicked, this, &MainWindow::tableWidgetDoubleClicked);
+    connect(ui->actionPesquisar, &QAction::triggered, this, &MainWindow::actionPesquisarTriggered);
+    connect(ui->lineSearch, &QLineEdit::textChanged, this, &MainWindow::lineSearchTextChanged);
+    connect(ui->action_FAZER, &QAction::triggered, this, &MainWindow::actionFazerTriggered);
+    connect(ui->actionFazendo, &QAction::triggered, this, &MainWindow::actionFazendoTriggered);
+    connect(ui->actionFeito, &QAction::triggered, this, &MainWindow::actionFeitoTriggered);
+    connect(ui->actionTodos, &QAction::triggered, this, &MainWindow::actionTodosTriggered);
+    connect(ui->actionQt, &QAction::triggered, this, &MainWindow::actionQtTriggered);
+    connect(ui->actionWell_Done, &QAction::triggered, this, &MainWindow::actionWellDoneTriggered);
+}
 
 void MainWindow::tableWidgetDoubleClicked(const QModelIndex &index)
 {
