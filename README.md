@@ -9,6 +9,7 @@ O bem-feito é uma lista de tarefas seguindo a ideia do À FAZER/FAZENDO/FEITO.
 * É possível filtrar por À FAZER/FAZENDO/FEITO
 * É possível pesquisar pelo nome de um tarefa.
 * Criado com Qt
+* Banco de dados sqlite
 
 # Imagens
 
